@@ -5,6 +5,16 @@
 </template>
 
 <style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: var(--clr-neutral-2);
+  font-weight: bold;
+}
 :root {
   --clr-neutral-1: #EDD9A3;
   --clr-neutral-2: #040403;
@@ -29,4 +39,17 @@ body {
   color: var(--clr-neutral-2);
 }
 
+input {
+  font-family: inherit;
+  width: 50%;
+  border: 0;
+  border-bottom: 2px solid var(--clr-neutral-2);
+  outline: 0;
+  font-size: 1.3rem;
+  color: var(--clr-neutral-2);
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+  margin: 1em;
+}
 </style>

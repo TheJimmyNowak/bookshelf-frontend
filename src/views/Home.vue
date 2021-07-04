@@ -59,9 +59,6 @@ header,
   display: flex;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
-  font-weight: bold;
-  color: #040403;
   border-radius: 3vw;
   transition: all .2s ease-in-out;
 }
