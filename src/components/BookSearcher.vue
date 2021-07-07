@@ -1,149 +1,49 @@
 <template>
   <div id="content">
-    <input name="book-search" placeholder="Czego szukasz?" v-model="searchedBook"/>
+    <input name="book-search" placeholder="Czego szukasz?" v-model="searchedBook" @input="search"/>
 
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
+    <transition-group name="book-list">
+      <div class="offer" v-for="book in books" :key="book._id">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
+        <div class="book-data">
+          <div class="book-info">
+            <p class="book-title">{{ book.name }}</p>
+            <p>{{ book.author }}</p>
+          </div>
+          <a href="/book/" class="buy-button">
+            <span>KUPUJ</span>
+          </a>
         </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
       </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
-    <div class="offer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
-      <div class="book-data">
-        <div class="book-info">
-          <p class="book-title">Tytuł</p>
-          <p>Bolszewicy</p>
-        </div>
-        <a href="/buy/" class="buy-button">
-          <span>KUPUJ</span>
-        </a>
-      </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "BookSearcher",
   data() {
     return {
-      searchedBook: ""
+      searchedBook: "",
+      books: []
     }
+  },
+  methods: {
+    search() {
+      axios.get("http://localhost:5000/api/book/filter?name=" + this.searchedBook)
+          .then((res) => {
+            this.books = res.data
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+    }
+  },
+  mounted() {
+    this.search()
   }
 }
 </script>
@@ -185,6 +85,15 @@ export default {
 .buy-button > span {
   display: inline-block;
   vertical-align: middle;
+}
+
+.book-list-enter-active, .book-list-leave-active {
+  transition: all 1s;
+}
+
+.book-list-enter, .book-list-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
 }
 
 @media screen and (max-width: 768px) {
