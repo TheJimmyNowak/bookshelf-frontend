@@ -10,7 +10,7 @@
             <p class="book-title">{{ book.name }}</p>
             <p>{{ book.author }}</p>
           </div>
-          <a href="/book/" class="buy-button">
+          <a v-bind:href="'/book/' + book._id" class="buy-button">
             <span>KUPUJ</span>
           </a>
         </div>
@@ -35,7 +35,7 @@ export default {
       axios.get("http://localhost:5000/api/book/filter?name=" + this.searchedBook)
           .then((res) => {
             this.books = res.data
-            console.log(res)
+            console.log(res.data[0]._id)
           })
           .catch((err) => {
             console.log(err)
