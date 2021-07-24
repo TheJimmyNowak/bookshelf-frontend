@@ -11,7 +11,7 @@
             <p>{{ book.author }}</p>
           </div>
           <a v-bind:href="'/book/' + book._id" class="buy-button">
-            <span>KUPUJ</span>
+            <span>KUP</span>
           </a>
         </div>
       </div>
@@ -80,11 +80,14 @@ export default {
   background-color: var(--clr-primary-2);
   height: 3rem;
   vertical-align: middle;
+  
 }
 
 .buy-button > span {
   display: inline-block;
   vertical-align: middle;
+  text-align: center;
+  line-height: 3rem;
 }
 
 .book-list-enter-active, .book-list-leave-active {
