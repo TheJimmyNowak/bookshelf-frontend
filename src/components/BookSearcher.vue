@@ -4,7 +4,7 @@
 
     <transition-group name="book-list">
       <div class="offer" v-for="book in books" :key="book._id">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
+        <img src="https://www.testhr.pl/wp-content/uploads/2020/01/logo_1kolor.png"/>
         <div class="book-data">
           <div class="book-info">
             <p class="book-title">{{ book.name }}</p>
