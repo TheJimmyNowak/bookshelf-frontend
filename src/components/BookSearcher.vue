@@ -4,14 +4,14 @@
 
     <transition-group name="book-list">
       <div class="offer" v-for="book in books" :key="book._id">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Mein_Kampf_dust_jacket.jpeg"/>
+        <img src="https://www.testhr.pl/wp-content/uploads/2020/01/logo_1kolor.png"/>
         <div class="book-data">
           <div class="book-info">
             <p class="book-title">{{ book.name }}</p>
             <p>{{ book.author }}</p>
           </div>
           <a v-bind:href="'/book/' + book._id" class="buy-button">
-            <span>KUPUJ</span>
+            <span>KUP</span>
           </a>
         </div>
       </div>
@@ -80,11 +80,14 @@ export default {
   background-color: var(--clr-primary-2);
   height: 3rem;
   vertical-align: middle;
+  
 }
 
 .buy-button > span {
   display: inline-block;
   vertical-align: middle;
+  text-align: center;
+  line-height: 3rem;
 }
 
 .book-list-enter-active, .book-list-leave-active {
